@@ -45,7 +45,8 @@ export function Link(props: React.ComponentProps<typeof NextLink>) {
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
       if (props.onClick) {
-        props.onClick(e)
+        const shouldHalt = props.onClick(e) === false
+        if (shouldHalt) return
       }
 
       if ('startViewTransition' in document) {
